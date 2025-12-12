@@ -2,6 +2,8 @@
 #include <string>
 using namespace std;
 
+class Monster; // 전방 선언
+
 // Player 추상 클래스
 class Player 
 {
@@ -9,6 +11,7 @@ class Player
 		Player(string Nickname); // 생성자
 
 		virtual void Attack() = 0; // 공격 함수 (순수 가상 함수)
+		virtual void Attack(Monster* Monster) = 0; // 몬스터 공격 함수 (순수 가상 함수, 오버로딩)
 		void PrintPlayerStatus() const; // 플레이어 상태 출력 함수 (상수 멤버 함수)
 
 		// Getter 함수

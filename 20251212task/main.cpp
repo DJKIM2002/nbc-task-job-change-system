@@ -3,6 +3,7 @@
 #include "Magician.h"
 #include "Thief.h"
 #include "Archer.h"
+#include "Monster.h"
 #include <iostream>
 #include <string>
 using namespace std;
@@ -49,12 +50,38 @@ int main() {
 			return 1;
 	}
 
-	Player->Attack();
+	// Player->Attack();
 	Player->PrintPlayerStatus();
 
+	// 몬스터 생성
+	Monster* Slime = new Monster("슬라임");
+
+	cout << "\n<몬스터 출현> " << Slime->GetName() << "\n";
+	cout << "\n전투 시작!\n";
+
+	while(Slime->GetHP() > 0 && Player->GetHP() > 0)
+	{
+		cout << "\n<플레이어의 공격>\n";
+		Player->Attack(Slime);
+
+		if(Slime->GetHP() > 0)
+		{
+			cout << "\n<몬스터의 반격>\n";
+			Slime->Attack(Player);
+		} else {
+			break;
+		}
+	}
+
+	// 동적 할당 해제
 	if (Player != nullptr) 
 	{
 		delete Player;
+	}
+
+	if(Slime != nullptr)
+	{
+		delete Slime;
 	}
 
 	return 0;
